@@ -13,8 +13,10 @@ public class LoginTest extends BaseTest {
         driver.get(config.getProperty(Constants.BASE_URL));
     }
 
-    @Test
+    @Test(description = "Login successful")
     public void loginAsBankManager() {
+        log.debug("Inside login test");
         driver.findElement(loginAsBankManagerBtn).click();
+        log.debug("Login executed");
     }
 }
