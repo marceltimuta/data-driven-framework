@@ -6,11 +6,11 @@ import common.TestProperties;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.Logger;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
-import org.testng.annotations.Test;
 
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
@@ -31,6 +31,7 @@ public class BaseTest {
             driver = new FirefoxDriver();
             log.debug("Driver setup ready");
         }
+        driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
     }
 
@@ -39,5 +40,9 @@ public class BaseTest {
         if (driver != null)
             driver.quit();
         log.debug("Test execution completed");
+    }
+
+    public boolean isElementPresent(By by) {
+        return driver.findElements(by).size() > 0;
     }
 }

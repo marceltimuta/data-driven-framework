@@ -1,12 +1,14 @@
 import base.BaseTest;
 import common.Constants;
 import org.openqa.selenium.By;
+import org.testng.Assert;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-public class LoginTest extends BaseTest {
+public class BankManagerLoginTest extends BaseTest {
 
-    private By loginAsBankManagerBtn = By.cssSelector("body > div.ng-scope > div > div.ng-scope > div > div.borderM.box.padT20 > div:nth-child(3) > button");
+    private static By loginAsBankManagerBtn = By.cssSelector("button[ng-click='manager()']");
+    private static By addCustomerButton = By.xpath("//button[normalize-space()='Add Customer']");
 
     @BeforeTest
     public void beforeMethod() {
@@ -17,6 +19,10 @@ public class LoginTest extends BaseTest {
     public void loginAsBankManager() {
         log.debug("Inside login test");
         driver.findElement(loginAsBankManagerBtn).click();
+
+        Assert.assertTrue(isElementPresent(addCustomerButton),"Login failed");
+
         log.debug("Login executed");
     }
+
 }
